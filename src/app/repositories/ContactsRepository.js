@@ -19,9 +19,10 @@ let contacts = [
 ];
 
 class ContactsRepository {
-  async findAll() {
+  async findAll(order = 'ASC') {
+    const direction = order.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
     const rows = await db.query(`
-      SELECT * FROM contacts
+      SELECT * FROM contacts ORDER BY name ${direction}
     `);
 
     return rows;
