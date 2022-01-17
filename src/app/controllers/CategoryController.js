@@ -22,11 +22,6 @@ class CategoryController {
   async store(request, response) {
     const { name } = request.body;
 
-    const doesHaveSameCategory = await CategoriesRepository.findByName(name);
-
-    if (doesHaveSameCategory) {
-      return response.status(400).json({ error: 'Category already exists' });
-    }
     if (!name) {
       return response.status(400).json({ error: 'Name is required' });
     }
@@ -39,11 +34,7 @@ class CategoryController {
   async update(request, response) {
     const { id } = request.params;
     const { category } = request.body;
-    const doesHaveSameCategory = await CategoriesRepository.findByName(category);
 
-    if (doesHaveSameCategory) {
-      return response.status(400).json({ error: 'Category Already exists' });
-    }
     if (!category) {
       response.status(400).json({ error: 'Category is required' });
     }
